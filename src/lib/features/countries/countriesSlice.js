@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 const initialState = {
     countries: []
 };
@@ -12,13 +13,14 @@ const api = "https://restcountries.com/v3.1/all?fields=name,flags,population,cur
 
 export const fetchCountries = createAsyncThunk ("countries/countries", async () => {
     const response = await axios.get(api);
-    console.log("reponse", response.status)
-    return response.data
+    console.log("reponse", response.status);
+    console.log(response.data);
+    return response.data;
     
 })
 
 
-export const countriesSlice = createSlice({
+const countriesSlice = createSlice({
     name: "countries",
     initialState,
     reducers: {},
