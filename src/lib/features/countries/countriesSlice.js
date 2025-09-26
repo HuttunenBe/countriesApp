@@ -1,42 +1,70 @@
-// Import functions from Redux Toolkit
-import { createSlice } from '@reduxjs/toolkit';
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
-// Import Axios for HTTP requests
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Initial state for the slice
+const api =
+  "https://restcountries.com/v3.1/all?fields=name,flags,population,currencies,capital,languages,region,subregion,area,timezones";
+
+// Enhanced initial state
 const initialState = {
-    countries: [] // Stores fetched countries
+  countries: [],
+  selectedCountry: null, // NEW: For single country data
+  loading: false, // NEW: Loading state
+  error: null, // NEW: Error handling
 };
 
-// API endpoint to fetch countries data
-const api = "https://restcountries.com/v3.1/all?fields=name,flags,population,currencies";
-
-// Async thunk to fetch countries from the API
+// Existing fetchCountries thunk
 export const fetchCountries = createAsyncThunk(
-    "countries/countries", // Action type prefix
-    async () => {
-        const response = await axios.get(api); // Make GET request
-        console.log("response", response.status); // Log HTTP status
-        console.log(response.data); // Log data for debugging
-        return response.data; // Returned data becomes payload in fulfilled action
-    }
+  "countries/countries",
+  async () => {
+    const response = await axios.get(api);
+    return response.data;
+  }
 );
 
-// Create the countries slice
-const countriesSlice = createSlice({
-    name: "countries",        // Slice name
-    initialState,             // Initial state defined above
-    reducers: {},             // No synchronous reducers yet
-    extraReducers: (builder) => {
-        // Handle async thunk actions
-        builder.addCase(fetchCountries.fulfilled, (state, action) => {
-            // Update state with fetched countries when thunk is fulfilled
-            state.countries = action.payload;
-        });
-    }
+// OPTIMIZED: Helper function to find country by name from existing data
+export const selectCountryByName = (state, countryName) => {
+  return state.countries.countries.find(
+    (country) =>
+      country.name.common.toLowerCase() === countryName.toLowerCase() ||
+      country.name.official.toLowerCase() === countryName.toLowerCase()
+  );
+};
+
+export const countriesSlice = createSlice({
+  name: "countries",
+  initialState,
+  reducers: {
+    // NEW: Set selected country from existing data
+    setSelectedCountry: (state, action) => {
+      state.selectedCountry = action.payload;
+      state.error = null;
+    },
+    // Clear selected country when navigating away
+    clearSelectedCountry: (state) => {
+      state.selectedCountry = null;
+      state.error = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      // Countries list handlers with loading states
+      .addCase(fetchCountries.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCountries.fulfilled, (state, action) => {
+        state.countries = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(fetchCountries.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  },
 });
 
-// Export the reducer to be used in the Redux store
+// Export actions
+export const { setSelectedCountry, clearSelectedCountry } =
+  countriesSlice.actions;
 export default countriesSlice.reducer;
