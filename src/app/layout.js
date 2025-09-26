@@ -1,5 +1,6 @@
 // Import the Navigation component which will be the top navigation bar
 import Navigation from "@/components/Navigation";
+import { CustomThemeProvider } from "./context/ThemeContext";
 
 // Import different font weights of Roboto for Material-UI and general use
 import "@fontsource/roboto/300.css";
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
       {/* Body element with fonts applied and smooth font rendering */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      >       <CustomThemeProvider>
         {/* Wrap the app with AuthProvider to provide authentication context */}
         <AuthProvider>
           {/* Wrap the app with StoreProvider to provide global state */}
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
             <Navigation>{children}</Navigation>
           </StoreProvider>
         </AuthProvider>
+        </CustomThemeProvider>
       </body>
     </html>
   );

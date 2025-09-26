@@ -10,6 +10,7 @@ import { useAuth } from "@/app/context/AuthContext";
 
 // Import Material-UI components for the navigation bar
 import { AppBar, Toolbar, Button } from "@mui/material";
+import ThemeToggle from "./ThemeToggle";
 
 // Define the Navigation component that can wrap other components (children)
 const Navigation = ({ children }) => {
@@ -44,6 +45,7 @@ const Navigation = ({ children }) => {
             Example
           </Button>
 
+<ThemeToggle/>
           {/* Button to navigate to /protected page */}
           <Button color="inherit" onClick={() => router.push("/protected")}>
             Protected
