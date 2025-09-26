@@ -1,15 +1,16 @@
 # 🌍 Countries App - 🚧 On going
 
-A countries app built as a project for React Advanced course at Business College Helsinki. With countries app you can view different countries and their information like currency, population and weather. The aim was to get more familiar with state management (Redux) and learn other advanced React topics. 
+A countries app built as a project in class for the **React Advanced course** at Business College Helsinki.  
+With this app, you can view different countries and their information such as currency, population, languages and weather. The aim is to gain hands-on experience with **state management (Redux)** and other more advanced React concepts.  
 
-🌐 Live Demo
+🌐 Live Demo will be here
 
 ## ✅ Features
 
 * Display countries with currency and flags
 * Navigation with React router 
-* 'More info' page with weather data (external API) and other details
-* Mobile responsivness 
+* 'More info' page with weather data (external API) and other country details
+* Mobile responsive design
 
 
 ## 💻 What I learned
@@ -27,3 +28,18 @@ A countries app built as a project for React Advanced course at Business College
 * Next.js
 
 ## Setup
+
+1. Clone the repository:  
+git clone https://github.com/your-username/countries-app.git
+
+2. In terminal run: npm install
+
+3. Create a .env.local file in the root and add your OpenWeatherMap API key:
+NEXT_PUBLIC_OPENWEATHERAPI=your_api_key_here
+
+4. Run the development server:
+npm run dev
+
+5. Install dependencies: 
+- MUI
+- Axios
