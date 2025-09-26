@@ -33,15 +33,16 @@ const Countries = () => {
     <Box display="flex" flexWrap="wrap" padding="2rem">
       {countries.map((country) => (
         // Each country is displayed as a Material-UI Card
-        <Card
-          key={country.name} // Unique key for React rendering
-          style={{
-            margin: "10px",
-            padding: "10px",
-            width: 250,
-            lineHeight: 1.5,
-          }}
-        >
+     <Card
+  key={country.cca3 || country.ccn3 || country.name.common} 
+  style={{
+    margin: "10px",
+    padding: "10px",
+    width: 250,
+    lineHeight: 1.5,
+  }}
+>
+
           <CardContent>
             {/* Country name */}
             <Typography variant="h2" style={{ fontSize: "29px", fontWeight: 900 }}>
