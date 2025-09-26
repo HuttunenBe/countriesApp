@@ -12,6 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Import Material-UI components for styling
 import { Card, CardContent, Typography, Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { CardActionArea } from "@mui/material";
+
+
 
 const Countries = () => {
   // Access the 'countries' array from Redux state
@@ -19,6 +23,14 @@ const Countries = () => {
 
   // Get dispatch function to trigger Redux actions
   const dispatch = useDispatch();
+  const router = useRouter();
+
+const handleCountryClick = (countryName) => {
+  // Create URL-friendly slug
+  const slug = countryName.toLowerCase().replace(/\s+/g, "-");
+  router.push(`/countries/${encodeURIComponent(slug)}`);
+};
+
 
   // useEffect runs once on mount to fetch countries from API
   useEffect(() => {
@@ -41,7 +53,9 @@ const Countries = () => {
     width: 250,
     lineHeight: 1.5,
   }}
->
+>  <CardActionArea onClick={() => handleCountryClick(country.name.common)}>
+    <CardContent>{/* Your existing card content */}</CardContent>
+
 
           <CardContent>
             {/* Country name */}
@@ -68,6 +82,7 @@ const Countries = () => {
               />
             </Typography>
           </CardContent>
+            </CardActionArea>
         </Card>
       ))}
     </Box>

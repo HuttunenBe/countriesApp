@@ -40,11 +40,12 @@ const CountryPage = () => {
     setWeatherError(null);
 
     try {
-      const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHERAPI;
+       const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHERAPI;
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
           capital
         )}&appid=${API_KEY}&units=metric`
+
       );
 
       if (!response.ok) throw new Error("Weather data not available");
@@ -53,7 +54,6 @@ const CountryPage = () => {
       setWeatherData(data);
     } catch (err) {
       setWeatherError(err.message);
-      console.error("Weather fetch error:", err);
     } finally {
       setWeatherLoading(false);
     }
