@@ -179,8 +179,7 @@ export function CustomThemeProvider({ children }) {
       ).matches;
       setIsDarkMode(prefersDark);
     }
-  }),
-    [];
+}, []);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
