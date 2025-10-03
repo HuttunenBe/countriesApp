@@ -7,7 +7,7 @@ With this app, you can view different countries and their information such as cu
 
 ## ✅ Features
 
-* Display countries with currency and flags
+* Display countries with currency, population and flags
 * Navigation with React router 
 * 'More info' page with weather data (external API) and other country details
 * User authentication 

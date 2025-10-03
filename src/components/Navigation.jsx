@@ -31,46 +31,53 @@ const Navigation = ({ children }) => {
   // Return the JSX for the navigation bar and the wrapped content
   return (
     <div>
-    <div>
-      {/* AppBar is the top navigation bar, position static to stay at the top */}
-      <AppBar position="static" sx={{ mb: 3 }}> {/* mb: 3 adds margin bottom */}
-        {/* Toolbar organizes the buttons horizontally */}
-        <Toolbar>
-          {/* Button to navigate to /countries page */}
-          <Button color="inherit" onClick={() => router.push("/countries")}>
-            Countries
-          </Button>
-
-          {/* Button to navigate to /example page */}
-          <Button color="inherit" onClick={() => router.push("/example")}>
-            Example
-          </Button>
-
-<ThemeToggle/>
-          {/* Button to navigate to /protected page */}
-          <Button color="inherit" onClick={() => router.push("/protected")}>
-            Protected
-          </Button>
-
-          {/* Conditional rendering: show Logout if user is logged in, else Login */}
-          {user ? (
-            <Button color="inherit" onClick={signOut}>
-              Logout
+  
+        {/* AppBar is the top navigation bar, position static to stay at the top */}
+        <AppBar position="static" sx={{ mb: 3 }}>
+          {" "}
+          {/* mb: 3 adds margin bottom */}
+          {/* Toolbar organizes the buttons horizontally */}
+          <Toolbar>
+            {/* Button to navigate to /countries page */}
+            <Button color="inherit" onClick={() => router.push("/countries")}>
+              Countries
             </Button>
-          ) : (
-            <Button
-              color="inherit"
-              onClick={() => router.push("/login")} // navigate to login page
-            >
-              Login
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
 
-      {/* Render any child components passed to Navigation */}
-      {children}
-    </div></div>
+            {/* Button to navigate to /example page */}
+            <Button color="inherit" onClick={() => router.push("/example")}>
+              Example
+            </Button>
+
+            <ThemeToggle />
+            {/* Button to navigate to /protected page */}
+            <Button color="inherit" onClick={() => router.push("/protected")}>
+              Protected
+            </Button>
+            {user && (
+              <Button color="inherit" onClick={() => router.push("/profile")}>
+                Profile
+              </Button>
+            )}
+            {/* Conditional rendering: show Logout if user is logged in, else Login */}
+            {user ? (
+              <Button color="inherit" onClick={signOut}>
+                Logout
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                onClick={() => router.push("/login")} // navigate to login page
+              >
+                Login
+              </Button>
+            )}
+          </Toolbar>
+        </AppBar>
+
+        {/* Render any child components passed to Navigation */}
+        {children}
+  </div>
+    
   );
 };
 
