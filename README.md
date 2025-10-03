@@ -10,22 +10,31 @@ With this app, you can view different countries and their information such as cu
 * Display countries with currency and flags
 * Navigation with React router 
 * 'More info' page with weather data (external API) and other country details
-* Mobile responsive design
+* User authentication 
+* Edit ____  users
+
+"This was my first time using Redux and Next.js. Importance of folder structure... "
 
 
 ## 💻 What I learned
 * Redux - state management
 * UseEffect - 
-* Props - props drilling 
+* Props - avoiding props drilling 
 * Importance of folder structure 
 * Routing 
 * API call 
+* Authentication using ____ 
+* Next.js
+* Supabase
 
 ## 🛠️ Tech Stack
 * React
 * Redux
 * MUI 
+
 * Next.js
+* Supabase
+* Google 
 
 ## Setup
 
