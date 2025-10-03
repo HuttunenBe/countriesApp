@@ -31,6 +31,7 @@ const Navigation = ({ children }) => {
   // Return the JSX for the navigation bar and the wrapped content
   return (
     <div>
+    <div>
       {/* AppBar is the top navigation bar, position static to stay at the top */}
       <AppBar position="static" sx={{ mb: 3 }}> {/* mb: 3 adds margin bottom */}
         {/* Toolbar organizes the buttons horizontally */}
@@ -69,7 +70,7 @@ const Navigation = ({ children }) => {
 
       {/* Render any child components passed to Navigation */}
       {children}
-    </div>
+    </div></div>
   );
 };
 
