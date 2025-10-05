@@ -85,7 +85,6 @@ const lightTheme = createTheme({
   },
 });
 
-// Define dark theme
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -173,7 +172,6 @@ export function CustomThemeProvider({ children }) {
     if (savedTheme) {
       setIsDarkMode(savedTheme === "dark");
     } else {
-      // check system preference
       const prefersDark = window.matchMedia(
         "(perefers-color-scheme: dark)"
       ).matches;

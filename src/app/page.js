@@ -43,28 +43,29 @@ export default function Home() {
         its unique details.
       </Typography>
 
- <div
-  style={{
-    display: "flex",
-    gap: "10px",
-    justifyContent: "center",
-    alignItems: "center"
-  }}
->
-<Button 
-  variant="contained" 
-  color="primary" 
-  onClick={() => router.push("/countries")}
->
-  Explore Countries
-</Button>
-<Button 
-  variant="contained" 
-  color="primary" 
-  onClick={() => router.push("/profile")}
->
-  My Profile
-</Button></div>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => router.push("/countries")}
+        >
+          Explore Countries
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => router.push("/profile")}
+        >
+          My Profile
+        </Button>
+      </div>
 
       <Paper
         elevation={3}

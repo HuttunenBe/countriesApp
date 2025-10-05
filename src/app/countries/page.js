@@ -1,105 +1,75 @@
-// Mark this component as a client-side component in Next.js
-"use client"; // This directive tells Next.js that this component will run entirely on the client side (browser), allowing hooks like useState/useEffect
+"use client";
 
-// Import the async thunk to fetch countries from Redux slice
-import { fetchCountries } from "@/lib/features/countries/countriesSlice"; // Import the fetchCountries action from the Redux slice, which handles async API calls
+import { fetchCountries } from "@/lib/features/countries/countriesSlice";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// Import React hooks
-import { useEffect } from "react"; // Import useEffect to run side effects in the component (e.g., fetching data on mount)
+import { Card, CardContent, Typography, Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { CardActionArea } from "@mui/material";
 
-// Import Redux hooks for state and dispatch
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch to dispatch actions and useSelector to access Redux state
+const Countries = () => {
+  const countries = useSelector((state) => state.countries.countries);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-// Import Material-UI components for styling
-import { Card, CardContent, Typography, Box } from "@mui/material"; // Import UI components: Card, CardContent, Typography for text, and Box for layout
-import { useRouter } from "next/navigation"; // Import Next.js router hook to navigate programmatically
-import { CardActionArea } from "@mui/material"; // Import CardActionArea to make the entire Card clickable
-
-const Countries = () => { // Declare the functional component Countries
-  // Access the 'countries' array from Redux state
-  const countries = useSelector((state) => state.countries.countries); 
-  // useSelector reads the 'countries' array from Redux state at state.countries.countries
-
-  // Get dispatch function to trigger Redux actions
-  const dispatch = useDispatch(); // Get the dispatch function to dispatch Redux actions
-  const router = useRouter(); // Get Next.js router instance to navigate programmatically
-
-  const handleCountryClick = (countryName) => { // Function to handle when a country card is clicked
-    // Create URL-friendly slug
-    const slug = countryName.toLowerCase().replace(/\s+/g, "-"); 
-    // Convert country name to lowercase and replace spaces with hyphens to create a URL-friendly slug
-
-    router.push(`/countries/${encodeURIComponent(slug)}`); 
-    // Navigate to the dynamic country page using the slug, encodeURIComponent ensures special characters are URL-safe
+  const handleCountryClick = (countryName) => {
+    const slug = countryName.toLowerCase().replace(/\s+/g, "-");
+    router.push(`/countries/${encodeURIComponent(slug)}`);
   };
 
-  // useEffect runs once on mount to fetch countries from API
-  useEffect(() => { // Run this effect once when component mounts
-    dispatch(fetchCountries()); // Dispatch the async thunk to fetch countries from the API and store in Redux
-  }, [dispatch]); // Dependency array contains dispatch, so effect runs only once
+  useEffect(() => {
+    dispatch(fetchCountries());
+  }, [dispatch]);
 
-  // Log countries array for debugging
-  console.log("countries", countries); // Print countries array in console to verify fetched data
+  console.log("countries", countries);
 
   return (
-    // Box container for layout, using flex and wrapping items
-    <Box display="flex" flexWrap="wrap" padding="2rem"> 
-    {/* Box component as a flex container with wrapping and padding */}
-      {countries.map((country) => ( 
-      // Map over the countries array to render a Card for each country
-        // Each country is displayed as a Material-UI Card
+    <Box display="flex" flexWrap="wrap" padding="2rem">
+      {countries.map((country) => (
         <Card
-          key={country.cca3 || country.ccn3 || country.name.common} 
-          // Use unique identifier for each card: cca3 or ccn3 or name as fallback
+          key={country.cca3 || country.ccn3 || country.name.common}
           style={{
             backgroundColor: "lightBlue",
-            margin: "10px", // Space around each card
-            padding: "10px", // Inner padding inside the card
-            width: 250, // Fixed width for each card
-            lineHeight: 1.5, // Line height for text readability
+            margin: "10px",
+            padding: "10px",
+            width: 250,
+            lineHeight: 1.5,
           }}
         >
-          {" "} 
+          {" "}
           <CardActionArea
-            onClick={() => handleCountryClick(country.name.common)} 
-            // Make entire card clickable; clicking calls handleCountryClick with country name
+            onClick={() => handleCountryClick(country.name.common)}
           >
-            <CardContent>{/* Your existing card content */}</CardContent>
-            {/* Empty CardContent for spacing; can be used for future content */}
+            <CardContent></CardContent>
 
             <CardContent>
-              {/* Country name */}
               <Typography
-                variant="h2" // Use h2 typography variant
-                style={{ fontSize: "29px", fontWeight: 900 }} 
-                // Custom style: larger font size and bold weight
+                variant="h2"
+                style={{ fontSize: "29px", fontWeight: 900 }}
               >
-                {country.name.common} 
-                {/* Display country name from API data */}
+                {country.name.common}
               </Typography>
 
-              {/* Country population */}
-              <Typography> Population: {country.population}</Typography> 
-              {/* Display country population */}
+              <Typography> Population: {country.population}</Typography>
 
-              {/* Country currencies */}
               <Typography>
                 {country.currencies
                   ? Object.values(country.currencies).map(
                       (country) => country.name
-                    ) 
-                  : ""} 
-                {/* If country has currencies, map over them and display names; otherwise display empty string */}
+                    )
+                  : ""}
               </Typography>
-          
 
-              {/* Country flag */}
+              <Typography style={{ marginTop: 4 }}>
+                Region: {country.region}
+              </Typography>
+
               <Typography>
                 <img
-                  src={country.flags?.svg} // Display country flag image using SVG URL
-                  alt={country.flag?.alt} // Alt text for accessibility
-                  style={{ height: "auto", width: 100, marginTop: 20 }} 
-                  // Set image width to 100px, height auto to maintain aspect ratio, and top margin
+                  src={country.flags?.svg}
+                  alt={country.flag?.alt}
+                  style={{ height: "auto", width: 100, marginTop: 20 }}
                 />
               </Typography>
             </CardContent>
@@ -110,5 +80,4 @@ const Countries = () => { // Declare the functional component Countries
   );
 };
 
-// Export Countries component for use in routes or other components
-export default Countries; // Export component so it can be imported in pages or other components
+export default Countries;
