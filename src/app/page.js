@@ -1,35 +1,87 @@
-// This tells Next.js that this component should be rendered on the client side
 "use client";
 
-// Import a custom authentication hook from your app context
 import { useAuth } from "./context/AuthContext";
+import { Container, Box, Typography, Paper } from "@mui/material";
+import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 
-// Define the Home component
 export default function Home() {
-  // Use the custom hook to get user information and session data
   const { user, session } = useAuth();
+  const router = useRouter();
 
-  // Log user data to the console for debugging purposes
   console.log("User data: ", user);
   console.log("Session: ", session);
 
-  // Return the JSX that will be rendered on the page
   return (
-    <div 
-      className="
-        font-sans                     // Use a sans-serif font
-        grid grid-rows-[20px_1fr_20px] // Create a CSS grid with 3 rows: top 20px, middle flexible, bottom 20px
-        items-center                  // Vertically center items in each grid cell
-        justify-items-center          // Horizontally center items in each grid cell
-        min-h-screen                  // Minimum height is full screen
-        p-8                           // Padding of 8 units around the container
-        pb-20                         // Extra bottom padding of 20 units
-        gap-16                        // Gap of 16 units between grid items
-        sm:p-20                       // On small screens or larger, padding becomes 20 units
-      "
+    <Container
+      maxWidth="md"
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        py: 8,
+        gap: 4,
+      }}
     >
-      {/* This is the main content of the home page */}
-      App will be here
-    </div>
+      <Typography variant="h3" component="h1" color="primary" fontWeight="bold">
+        Welcome to World Explorer!
+      </Typography>
+
+      <Typography
+        variant="body1"
+        color="textSecondary"
+        sx={{ maxWidth: 600, mb: 2 }}
+      >
+        Discover the countries of the world with ease — from their flags and
+        capitals to population, region, and more. This app makes exploring
+        global information simple and engaging, whether you're curious about a
+        specific country or just want to learn more about our planet. Start by
+        browsing the list of countries or searching for one to dive deeper into
+        its unique details.
+      </Typography>
+
+ <div
+  style={{
+    display: "flex",
+    gap: "10px",
+    justifyContent: "center",
+    alignItems: "center"
+  }}
+>
+<Button 
+  variant="contained" 
+  color="primary" 
+  onClick={() => router.push("/countries")}
+>
+  Explore Countries
+</Button>
+<Button 
+  variant="contained" 
+  color="primary" 
+  onClick={() => router.push("/profile")}
+>
+  My Profile
+</Button></div>
+
+      <Paper
+        elevation={3}
+        sx={{
+          borderRadius: 2,
+          overflow: "hidden",
+          width: "100%",
+          maxWidth: 600,
+        }}
+      >
+        <Box
+          component="img"
+          src="https://images.pexels.com/photos/8828421/pexels-photo-8828421.jpeg"
+          alt="World map globe"
+          sx={{ width: "100%", display: "block" }}
+        />
+      </Paper>
+    </Container>
   );
 }

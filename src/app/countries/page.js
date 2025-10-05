@@ -52,6 +52,7 @@ const Countries = () => { // Declare the functional component Countries
           key={country.cca3 || country.ccn3 || country.name.common} 
           // Use unique identifier for each card: cca3 or ccn3 or name as fallback
           style={{
+            backgroundColor: "lightBlue",
             margin: "10px", // Space around each card
             padding: "10px", // Inner padding inside the card
             width: 250, // Fixed width for each card
@@ -78,7 +79,7 @@ const Countries = () => { // Declare the functional component Countries
               </Typography>
 
               {/* Country population */}
-              <Typography>{country.population}</Typography> 
+              <Typography> Population: {country.population}</Typography> 
               {/* Display country population */}
 
               {/* Country currencies */}
@@ -90,6 +91,7 @@ const Countries = () => { // Declare the functional component Countries
                   : ""} 
                 {/* If country has currencies, map over them and display names; otherwise display empty string */}
               </Typography>
+          
 
               {/* Country flag */}
               <Typography>

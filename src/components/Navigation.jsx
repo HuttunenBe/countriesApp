@@ -33,12 +33,16 @@ const Navigation = ({ children }) => {
     <div>
   
         {/* AppBar is the top navigation bar, position static to stay at the top */}
-        <AppBar position="static" sx={{ mb: 3 }}>
+        <AppBar position="static" sx={{ mb: 3 }} >
           {" "}
           {/* mb: 3 adds margin bottom */}
           {/* Toolbar organizes the buttons horizontally */}
           <Toolbar>
+          <ThemeToggle />
             {/* Button to navigate to /countries page */}
+            <Button color="inherit" onClick={() => router.push("/")}>
+              Home
+            </Button>
             <Button color="inherit" onClick={() => router.push("/countries")}>
               Countries
             </Button>
@@ -48,7 +52,7 @@ const Navigation = ({ children }) => {
               Example
             </Button>
 
-            <ThemeToggle />
+    
             {/* Button to navigate to /protected page */}
             <Button color="inherit" onClick={() => router.push("/protected")}>
               Protected
@@ -70,6 +74,7 @@ const Navigation = ({ children }) => {
               >
                 Login
               </Button>
+              
             )}
           </Toolbar>
         </AppBar>

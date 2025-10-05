@@ -1,6 +1,7 @@
 // Import the Navigation component which will be the top navigation bar
 import Navigation from "@/components/Navigation";
 import { CustomThemeProvider } from "./context/ThemeContext";
+import Footer from "../components/Footer"
 
 // Import different font weights of Roboto for Material-UI and general use
 import "@fontsource/roboto/300.css";
@@ -56,6 +57,7 @@ export default function RootLayout({ children }) {
           </StoreProvider>
         </AuthProvider>
         </CustomThemeProvider>
+        <Footer/>
       </body>
     </html>
   );
