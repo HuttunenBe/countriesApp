@@ -38,10 +38,10 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <StoreProvider>
               <Navigation>{children}</Navigation>
+              <Footer />  
             </StoreProvider>
           </AuthProvider>
         </CustomThemeProvider>
-        <Footer />
       </body>
     </html>
   );

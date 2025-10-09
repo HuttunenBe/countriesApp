@@ -160,6 +160,8 @@ const CountryPage = () => {
     );
   }
 
+  
+
   const getCurrencies = (country) => {
     if (!country.currencies) return "N/A";
     return Object.values(country.currencies)
@@ -175,9 +177,8 @@ const CountryPage = () => {
   const formatPopulation = (population) => {
     return new Intl.NumberFormat().format(population);
   };
-
   return (
-    <Box sx={{ maxWidth: 1200, mx: "auto", p: 3 }}>
+    <Box sx={{ maxWidth: 1400, mx: "auto", p: 3 }}>
       <Button
         variant="outlined"
         onClick={handleBack}
@@ -186,219 +187,119 @@ const CountryPage = () => {
       >
         Back to Countries
       </Button>
-
+      <Box
+  display="flex"
+  alignItems="center"
+  justifyContent="center"
+  m="0 auto"   // shorthand for margin: 0 auto
+>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Card sx={{ height: "100%" }}>
-              <CardContent>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  gap={3}
-                >
-                  <Image
-                    width={300}
-                    height={200}
-                    style={{
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                      border: "1px solid #ddd",
-                    }}
-                    src={
-                      selectedCountry.flags?.svg || selectedCountry.flags?.png
-                    }
-                    alt={`Flag of ${selectedCountry.name?.common}`}
-                    priority
-                  />
-                  <Box textAlign="center">
-                    <Typography variant="h3" component="h1" gutterBottom>
-                      {selectedCountry.name?.common}
-                    </Typography>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Card sx={{ height: "100%" }}>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  Country Details
-                </Typography>
-                <Divider sx={{ mb: 2 }} />
+          <Grid item xs={12} md={4}>
+            <Box display="flex" flexDirection="column" alignItems="center" gap={3}>
+              <Image
+                width={300}
+                height={200}
+                src={selectedCountry.flags?.svg || selectedCountry.flags?.png}
+                alt={`Flag of ${selectedCountry.name?.common}`}
+                style={{ borderRadius: "8px", border: "1px solid #ddd", objectFit: "cover" }}
+              />
+              <Typography variant="h3">{selectedCountry.name?.common}</Typography>
 
-                <Box display="flex" flexDirection="column" gap={2}>
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      Population
-                    </Typography>
-                    <Typography variant="body1">
-                      {formatPopulation(selectedCountry.population)}
-                    </Typography>
-                  </Box>
-
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      Capital
-                    </Typography>
-                    <Typography variant="body1">
-                      {selectedCountry.capital?.join(", ") || "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      Region
-                    </Typography>
-                    <Typography variant="body1">
-                      {selectedCountry.region || "N/A"}
-                    </Typography>
-                  </Box>
-
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      Area
-                    </Typography>
-                    <Typography variant="body1">
-                      {selectedCountry.area || "N/A"} km²
-                    </Typography>
-                  </Box>
-
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      Timezones
-                    </Typography>
-                    <Typography variant="body1">
-                      {selectedCountry.timezones || "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      Languages
-                    </Typography>
-
-                    <Box sx={{ mt: 1 }}>
-                      {getLanguages(selectedCountry)
-                        .split(", ")
-                        .map((language, index) => (
-                          <Chip
-                            key={index}
-                            label={language}
-                            variant="outlined"
-                            size="small"
-                            sx={{ mr: 1, mb: 1 }}
-                          />
-                        ))}
-                    </Box>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-
-        {selectedCountry?.capital?.[0] && (
-          <Grid container spacing={4} sx={{ mt: 2 }}>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" gutterBottom>
-                    Weather in {selectedCountry.capital[0]}
-                  </Typography>
-                  <Divider sx={{ mb: 2 }} />
-
-                  {weatherLoading && (
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      minHeight="200px"
-                    >
-                      <Typography variant="body1">
-                        Loading weather data...
-                      </Typography>
-                    </Box>
-                  )}
-
-                  {weatherError && (
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      minHeight="200px"
-                    >
-                      <Typography variant="body1" color="error">
-                        {weatherError}
-                      </Typography>
-                    </Box>
-                  )}
-
-                  {weatherData && !weatherLoading && (
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} md={6}>
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          alignItems="center"
-                          gap={2}
-                        >
-                          <Box display="flex" alignItems="center" gap={2}>
+              {selectedCountry?.capital?.[0] && (
+                <Card sx={{ width: "100%", mt: 2 }}>
+                  <CardContent>
+                    <Typography variant="h5">Weather in {selectedCountry.capital[0]}</Typography>
+                    <Divider sx={{ mb: 2 }} />
+                    {weatherLoading && (
+                      <Box display="flex" justifyContent="center" alignItems="center" minHeight="150px">
+                        <Typography>Loading weather data...</Typography>
+                      </Box>
+                    )}
+                    {weatherError && (
+                      <Box display="flex" justifyContent="center" alignItems="center" minHeight="150px">
+                        <Typography color="error">{weatherError}</Typography>
+                      </Box>
+                    )}
+                    {weatherData && !weatherLoading && (
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <Box display="flex" flexDirection="column" alignItems="center">
                             <Image
                               width={80}
                               height={80}
                               src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                               alt={weatherData.weather[0].description}
                             />
-                            <Box>
-                              <Typography variant="h3" component="div">
-                                {Math.round(weatherData.main.temp)}°C
-                              </Typography>
-                              <Typography variant="h6" color="text.secondary">
-                                {weatherData.weather[0].main}
-                              </Typography>
-                            </Box>
+                            <Typography variant="h3">{Math.round(weatherData.main.temp)}°C</Typography>
+                            <Typography color="text.secondary">{weatherData.weather[0].main}</Typography>
                           </Box>
-                        </Box>
+                        </Grid>
                       </Grid>
-
-                      <Grid item xs={12} md={6}>
-                        <Box display="flex" flexDirection="column" gap={1.5}>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography variant="body1" fontWeight="bold">
-                              Humidity:
-                            </Typography>
-                            <Typography variant="body1">
-                              {weatherData.main.humidity}%
-                            </Typography>
-                          </Box>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography variant="body1" fontWeight="bold">
-                              Wind Speed:
-                            </Typography>
-                            <Typography variant="body1">
-                              {weatherData.wind.speed} m/s
-                            </Typography>
-                          </Box>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography variant="body1" fontWeight="bold">
-                              Feels like:
-                            </Typography>
-                            <Typography variant="body1">
-                              {Math.round(weatherData.main.feels_like)}°C
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  )}
-                </CardContent>
-              </Card>
-            </Grid>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+            </Box>
           </Grid>
-        )}
+          <Grid item xs={12} md={4}>
+            <Card sx={{ width: "100%", p: 2 }}>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                  Country Details
+                </Typography>
+                <Divider sx={{ mb: 2 }} />
+                <Typography variant="subtitle1" fontWeight="bold">Population</Typography>
+                <Typography>{formatPopulation(selectedCountry.population)}</Typography>
+
+                <Typography variant="subtitle1" fontWeight="bold">Currencies</Typography>
+                <Typography>{getCurrencies(selectedCountry)}</Typography>
+
+                <Typography variant="subtitle1" fontWeight="bold">Capital</Typography>
+                <Typography>{selectedCountry.capital?.join(", ") || "N/A"}</Typography>
+
+                <Typography variant="subtitle1" fontWeight="bold">Region</Typography>
+                <Typography>{selectedCountry.region || "N/A"}</Typography>
+
+                <Typography variant="subtitle1" fontWeight="bold">Area</Typography>
+                <Typography>{selectedCountry.area || "N/A"} km²</Typography>
+
+                <Typography variant="subtitle1" fontWeight="bold">Timezones</Typography>
+                <Typography>{selectedCountry.timezones?.join(", ") || "N/A"}</Typography>
+
+                <Typography variant="subtitle1" fontWeight="bold">Languages</Typography>
+                <Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 1 }}>
+                  {getLanguages(selectedCountry).split(", ").map((lang, i) => (
+                    <Chip key={i} label={lang} size="small" variant="outlined" />
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Box sx={{ width: "100%", height: 500, position: "relative", borderRadius: 2, overflow: "hidden" }}>
+              <iframe
+                title="Google Map"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(
+                  selectedCountry.capital?.[0] || selectedCountry.name.common
+                )}&output=embed`}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+
+         
+              <Box
+          
+              />
+            </Box>
+          </Grid>
+        </Grid>
       </Paper>
-    </Box>
+    </Box></Box>
   );
 };
 

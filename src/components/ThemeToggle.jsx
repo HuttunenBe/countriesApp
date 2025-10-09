@@ -6,10 +6,10 @@ import { IconButton } from "@mui/material";
 
 export default function ThemeToggle() {
   const { isDarkMode, toggleTheme } = useTheme();
-
-  return (
-    <IconButton onClick={toggleTheme}>
-        {isDarkMode? <Brightness7/> : <Brightness4/>}
-    </IconButton>
-  )
-}
+    
+    return (
+      <IconButton onClick={toggleTheme}>
+        {isDarkMode ? <Brightness7/> : <Brightness4 htmlColor="white" />}
+      </IconButton>
+    );
+  }
