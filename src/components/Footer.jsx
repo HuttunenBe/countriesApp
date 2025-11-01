@@ -41,27 +41,37 @@ export default function Footer() {
         >
           Countries
         </Button>
-        <Button
-          onClick={() => router.push("/example")}
-          sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
-        >
-          Example
-        </Button>
-        <Button
-          onClick={() => router.push("/protected")}
-          sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
-        >
-          Protected
-        </Button>
 
         {user ? (
           <>
+            <Button
+              onClick={() => router.push("/favourite")}
+              sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
+            >
+              Favourite
+            </Button>
+
             <Button
               onClick={() => router.push("/profile")}
               sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
             >
               Profile
             </Button>
+
+            <Button
+              onClick={() => router.push("/example")}
+              sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
+            >
+              Example
+            </Button>
+
+            <Button
+              onClick={() => router.push("/protected")}
+              sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
+            >
+              Protected
+            </Button>
+
             <Button
               onClick={signOut}
               sx={{ color: "white", textTransform: "none", fontSize: "1.1rem" }}
@@ -78,7 +88,6 @@ export default function Footer() {
           </Button>
         )}
       </Box>
-
       <Box
         sx={{
           display: "flex",

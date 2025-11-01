@@ -1,98 +1,57 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/context/AuthContext";
-import { AppBar, Toolbar, Button, useTheme } from "@mui/material";
 import ThemeToggle from "./ThemeToggle";
 
-const Navigation = ({ children }) => {
-  const router = useRouter();
-  const theme = useTheme();
+const { useAuth } = require("@/app/context/AuthContext");
+const { AppBar, Toolbar, Button } = require("@mui/material");
 
+const Navigation = ({ children }) => {
   const { user, signOut } = useAuth();
+  const router = useRouter();
 
   return (
     <div>
-      <AppBar
-        position="static"
-        sx={{
-          mb: 3,
-          backgroundColor: theme.palette.mode === "dark" ? "#000d08" : "teal",
-          p: 2,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Toolbar sx={{ display: "flex", gap: 2 }}>
-          <ThemeToggle />
-
-          <Button
-            color="inherit"
-            onClick={() => router.push("/")}
-            sx={{ fontSize: "1rem", textTransform: "none" }}
-          >
+      <AppBar position="static" color="gradient" sx={{ mb: 3 }}>
+        <Toolbar>
+          <Button color="inherit" onClick={() => router.push("/")}>
             Home
           </Button>
-          <Button
-            color="inherit"
-            onClick={() => router.push("/countries")}
-            sx={{ fontSize: "1rem", textTransform: "none" }}
-          >
+          <Button color="inherit" onClick={() => router.push("/countries")}>
             Countries
           </Button>
-          <Button
-            color="inherit"
-            onClick={() => router.push("/example")}
-            sx={{ fontSize: "1rem", textTransform: "none" }}
-          >
+          {/*<Button color="inherit" onClick={() => router.push("/example")}>
             Example
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => router.push("/protected")}
-            sx={{ fontSize: "1rem", textTransform: "none" }}
-          >
-            Protected
-          </Button>
-
+          </Button>*/}
           {user && (
-            <Button
-              color="inherit"
-              onClick={() => router.push("/profile")}
-              sx={{ fontSize: "1rem", textTransform: "none" }}
-            >
+            <Button color="inherit" onClick={() => router.push("/favourites")}>
+              Favourites
+            </Button>
+          )}
+
+          <ThemeToggle />
+          {user && (
+            <Button color="inherit" onClick={() => router.push("/protected")}>
+              Protected
+            </Button>
+          )}
+          {user && (
+            <Button color="inherit" onClick={() => router.push("/profile")}>
               Profile
             </Button>
           )}
-
-          {user ? (
-            <Button
-              color="inherit"
-              onClick={signOut}
-              sx={{ fontSize: "1rem", textTransform: "none" }}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              color="inherit"
-              onClick={() => router.push("/login")}
-              sx={{ fontSize: "1rem", textTransform: "none" }}
-            >
+          {!user && (
+            <Button color="inherit" onClick={() => router.push("/login")}>
               Login
             </Button>
           )}
+          {user && (
+            <Button color="inherit" onClick={() => signOut()}>
+              Logout
+            </Button>
+          )}
         </Toolbar>
-        <img
-          src="/Logo.svg"
-          alt="Logo"
-          style={{ height: 40 }}
-          onClick={() => router.push("/")}
-        />
       </AppBar>
-
       {children}
     </div>
   );

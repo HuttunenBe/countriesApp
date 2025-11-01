@@ -173,11 +173,11 @@ export function CustomThemeProvider({ children }) {
       setIsDarkMode(savedTheme === "dark");
     } else {
       const prefersDark = window.matchMedia(
-        "(perefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)"
       ).matches;
       setIsDarkMode(prefersDark);
     }
-}, []);
+  }, []);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
@@ -202,9 +202,9 @@ export function CustomThemeProvider({ children }) {
 }
 
 export function useTheme() {
-    const context = useContext(ThemeContext);
-    if (context === undefined) {
-        throw new Error("useTheme must be used within a Theme Provider");
-    }
-    return context;
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a Theme Provider");
+  }
+  return context;
 }

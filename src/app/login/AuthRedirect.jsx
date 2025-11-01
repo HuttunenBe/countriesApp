@@ -10,7 +10,7 @@ const AuthRedirect = () => {
     if (user) {
       router.push("/protected");
     }
-  }, [user, router]); 
+  }, [user, router]);
 
   return null;
 };

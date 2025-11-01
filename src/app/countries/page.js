@@ -7,6 +7,7 @@ import { Card, CardContent, Typography, Box, Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { CardActionArea } from "@mui/material";
 import Loading from "@/components/Loading";
+import FavouriteButton from "@/components/FavouriteButton";
 
 const Countries = () => {
   const countries = useSelector((state) => state.countries.countries);
@@ -27,17 +28,15 @@ const Countries = () => {
   }, [dispatch, countries.length]);
 
   const showMore = () => setVisibleCountries((prev) => prev + 12);
-  const showLess = () => setVisibleCountries((prev) => (prev - 12));
+  const showLess = () => setVisibleCountries((prev) => prev - 12);
 
   if (loading) return <Loading message="Fetching countries..." />;
-
 
   let filteredCountries = countries
     .filter((country) =>
       country.name.common.toLowerCase().startsWith(searchCountry.toLowerCase())
     )
     .filter((country) => regionSort === "All" || country.region === regionSort);
-
 
   const sortedCountries = [...filteredCountries];
   if (sortCountries === "nameAsc") {
@@ -65,26 +64,28 @@ const Countries = () => {
   };
 
   return (
-    
-    <Box padding="2rem"> <Box mb={4} textAlign="center" maxWidth={700} mx="auto">
-    <Typography variant="h5" gutterBottom>
-      🌎 Explore the World!
-    </Typography>
-    <Typography variant="body1" color="textSecondary">
-      Welcome to World Explorer! Discover countries from every continent, learn about their capitals, population, regions, and flags. 
-      Use the search, sort, and filter tools below to find exactly what you are looking for and start your global adventure today.
-    </Typography>
-  </Box>
-    <Box
-  marginBottom="1rem"
-  display="flex"
-  gap="0.5rem"
-  flexWrap="wrap"
-  justifyContent="center"
-  alignItems="center"
-  mx="auto" 
->
-  
+    <Box padding="2rem">
+      {" "}
+      <Box mb={4} textAlign="center" maxWidth={700} mx="auto">
+        <Typography variant="h5" gutterBottom>
+          🌎 Explore the World!
+        </Typography>
+        <Typography variant="body1" color="textSecondary">
+          Welcome to World Explorer! Discover countries from every continent,
+          learn about their capitals, population, regions, and flags. Use the
+          search, sort, and filter tools below to find exactly what you are
+          looking for and start your global adventure today.
+        </Typography>
+      </Box>
+      <Box
+        marginBottom="1rem"
+        display="flex"
+        gap="0.5rem"
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        mx="auto"
+      >
         <input
           type="text"
           placeholder="Search country by name"
@@ -117,27 +118,37 @@ const Countries = () => {
           ))}
         </select>
       </Box>
-
-      <Box display="flex"
-  flexWrap="wrap"
-  justifyContent="center"
-  alignItems="center"
-  mx="auto" >
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        mx="auto"
+      >
         {sortedCountries.slice(0, visibleCountries).map((country) => (
           <Card
             key={country.cca3 || country.ccn3 || country.name.common}
             style={{
               margin: 10,
               padding: 20,
-              width: 250
+              width: 250,
             }}
           >
             <CardActionArea
               onClick={() => handleCountryClick(country.name.common)}
             >
+              <FavouriteButton country={country} />
               <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: 900, fontSize:18}}>{country.name.common}</Typography>
-                <Typography>Capital: {country.capital?.[0] || "N/A"}</Typography>  <Typography variant="body1">
+                <Box
+                  sx={{ mt: 1, display: "flex", justifyContent: "center" }}
+                ></Box>
+                <Typography variant="h6" sx={{ fontWeight: 900, fontSize: 18 }}>
+                  {country.name.common}
+                </Typography>
+                <Typography>
+                  Capital: {country.capital?.[0] || "N/A"}
+                </Typography>{" "}
+                <Typography variant="body1">
                   {country && getCurrencies(country)}
                 </Typography>
                 <Typography>Population: {country.population}</Typography>
@@ -148,27 +159,26 @@ const Countries = () => {
                     alt="flag"
                     style={{ width: 100, marginTop: 20 }}
                   />
-                )}<p>Click for more info</p>
+                )}
+                <p>Click for more info</p>
               </CardContent>
             </CardActionArea>
           </Card>
         ))}
       </Box>
-
-      <Box marginTop="1rem"    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: 10
-    }}>
+      <Box
+        marginTop="1rem"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
         {visibleCountries < sortedCountries.length && (
-         <Button
-    onClick={showMore}
-    variant="contained"
- 
-  >
-    Show More
-  </Button>
+          <Button onClick={showMore} variant="contained">
+            Show More
+          </Button>
         )}
         {visibleCountries > 13 && (
           <Button onClick={showLess} variant="contained">

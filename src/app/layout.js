@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import { CustomThemeProvider } from "./context/ThemeContext";
 import Footer from "../components/Footer";
 
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -38,7 +39,7 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <StoreProvider>
               <Navigation>{children}</Navigation>
-              <Footer />  
+              <Footer />
             </StoreProvider>
           </AuthProvider>
         </CustomThemeProvider>

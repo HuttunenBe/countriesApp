@@ -78,6 +78,10 @@ NEXT_PUBLIC_OPENWEATHERAPI=your_openweather_api_key
 - **Server-side Validation**: Proper user verification in API routes
 - **Unique Constraints**: Prevents duplicate favourites per user
 
+
+
+
+
 ## Phase 2: User Profile Feature (Planned)
 
 The following features are planned for Phase 2:

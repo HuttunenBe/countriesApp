@@ -4,7 +4,6 @@ import {
 } from "@/lib/supabase/supabase-server";
 import { NextResponse } from "next/server";
 
-// GET - Fetch user profile
 export async function GET(request) {
   try {
     const { user, error: authError } = await getAuthenticatedUser(request);

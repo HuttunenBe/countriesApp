@@ -57,7 +57,7 @@ export const updateProfile = createAsyncThunk(
       }
 
       const response = await fetch("/api/profile", {
-        method: "PUT", // update
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${session.access_token}`,
           "Content-Type": "application/json",
@@ -77,7 +77,6 @@ export const updateProfile = createAsyncThunk(
     }
   }
 );
-
 
 export const uploadAvatar = createAsyncThunk(
   "profile/uploadAvatar",
@@ -135,7 +134,7 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-  
+
       .addCase(fetchProfile.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -186,7 +185,6 @@ export const selectProfile = (state) => state.profile.profile;
 export const selectProfileLoading = (state) => state.profile.loading;
 export const selectProfileUpdating = (state) => state.profile.updating;
 export const selectProfileError = (state) => state.profile.error;
-
 export const { clearProfile, clearError, setProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;

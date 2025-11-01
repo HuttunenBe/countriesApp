@@ -1,15 +1,14 @@
-
 import { DynamicTable } from "@/components/DynamicTable";
 
 const data = [
   {
-    name: "John",                
-    age: 30,                   
-    city: "New York",          
-    isStudent: true,             
-    date: new Date(),            
-    wentToSchool: true,     
-    personality: "introverted",   
+    name: "John",
+    age: 30,
+    city: "New York",
+    isStudent: true,
+    date: new Date(),
+    wentToSchool: true,
+    personality: "introverted",
   },
   {
     name: "Jane",
@@ -27,7 +26,6 @@ const data = [
   },
 ];
 
-
 const Example = () => {
   return (
     <div>
@@ -35,6 +33,5 @@ const Example = () => {
     </div>
   );
 };
-
 
 export default Example;
