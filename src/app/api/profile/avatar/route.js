@@ -1,3 +1,4 @@
+
 import {
   getAuthenticatedUser,
   supabaseServer,
@@ -29,7 +30,7 @@ export async function POST(request) {
       );
     }
 
-    const maxSize = 5 * 1024 * 1024; // 5MB // 5,242,880
+    const maxSize = 5 * 1024 * 1024; // 5MB
     if (file.size > maxSize) {
       return NextResponse.json(
         { error: "File too large. Maximum size is 5MB." },

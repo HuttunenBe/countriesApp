@@ -9,7 +9,7 @@ export default function ThemeToggle() {
 
   return (
     <IconButton onClick={toggleTheme}>
-      {isDarkMode ? <Brightness7 /> : <Brightness4 htmlColor="white" />}
+      {isDarkMode ? <Brightness7 /> : <Brightness4 />}
     </IconButton>
   );
 }

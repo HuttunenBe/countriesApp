@@ -46,7 +46,6 @@ const FavouritesPage = () => {
 
   return (
     <Box sx={{ maxWidth: 1200, mx: "auto", p: 3 }}>
-      <h2>Your favorite countries</h2>
       {favourites.length === 0 ? (
         <Typography variant="h4">No favourites found</Typography>
       ) : (

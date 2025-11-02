@@ -7,6 +7,7 @@ const initialState = {
   updating: false,
 };
 
+// Async thunk to fetch user profile
 export const fetchProfile = createAsyncThunk(
   "profile/fetchProfile",
   async (_, { rejectWithValue }) => {
@@ -42,6 +43,7 @@ export const fetchProfile = createAsyncThunk(
   }
 );
 
+// Async thunk to update user profile
 export const updateProfile = createAsyncThunk(
   "profile/updateProfile",
   async (profileData, { rejectWithValue }) => {
@@ -78,6 +80,7 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
+// Async thunk to upload avatar
 export const uploadAvatar = createAsyncThunk(
   "profile/uploadAvatar",
   async (file, { rejectWithValue }) => {
@@ -134,7 +137,7 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
+      // Fetch profile
       .addCase(fetchProfile.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -148,7 +151,7 @@ const profileSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
+      // Update profile
       .addCase(updateProfile.pending, (state) => {
         state.updating = true;
         state.error = null;
@@ -162,7 +165,7 @@ const profileSlice = createSlice({
         state.updating = false;
         state.error = action.payload;
       })
-
+      // Upload avatar
       .addCase(uploadAvatar.pending, (state) => {
         state.updating = true;
         state.error = null;
@@ -181,10 +184,12 @@ const profileSlice = createSlice({
   },
 });
 
+// Selectors
 export const selectProfile = (state) => state.profile.profile;
 export const selectProfileLoading = (state) => state.profile.loading;
 export const selectProfileUpdating = (state) => state.profile.updating;
 export const selectProfileError = (state) => state.profile.error;
+
 export const { clearProfile, clearError, setProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;

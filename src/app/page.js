@@ -199,7 +199,6 @@ export default function Home() {
                   {c.name.common}
                 </Typography>
                 <Typography variant="caption" color="textSecondary">
-                  Capital: {c.capital?.[0] || "N/A"}
                   <p>Click for more info</p>
                 </Typography>
               </Paper>
