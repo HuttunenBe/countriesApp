@@ -133,11 +133,12 @@ const Countries = () => {
               padding: 20,
               width: 250,
             }}
-          >  <FavouriteButton country={country} />
+          >
+            {" "}
+            <FavouriteButton country={country} />
             <CardActionArea
               onClick={() => handleCountryClick(country.name.common)}
             >
-
               <CardContent>
                 <Box
                   sx={{ mt: 1, display: "flex", justifyContent: "center" }}
