@@ -1,4 +1,4 @@
-# 🌍 Countries App - 🚧 On going
+# 🌍 Countries App 
 
 A countries app built as a project in class for the **React Advanced course** at Business College Helsinki.  
 With this app, you can view different countries and their information such as currency, population, languages and weather. The site includes user log in and profile. You can favorite countries and view them at favorite page.
