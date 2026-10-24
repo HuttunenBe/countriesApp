@@ -18,7 +18,13 @@ With this app, you can view different countries and their information such as cu
 
 ## 🛠️ Tech Stack
 * Next.js
-* Redux
-* MUI 
+* React
+* Material UI (MUI)
+* Tailwind CSS
+* JavaScript
+* Redux Toolkit
+* React Redux
 * Supabase
-* Google 
+* Google Authentication
+* Axios
+* Weather API
