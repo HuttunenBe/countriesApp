@@ -14,7 +14,6 @@ With this app, you can view different countries and their information such as cu
 * Edit your profile 
 * Searchbar to search countries by name and dropdown menu to display coutries by continent 
 * Add countries to favorites and view them at page (Only when logged in)
-* Adding later: Mobile responsivness and design fix
 
 
 ## 🛠️ Tech Stack
